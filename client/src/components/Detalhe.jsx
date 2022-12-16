@@ -1,14 +1,16 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import EstadoDropDown from './EstadoDropDown'
 import CidadeDropDown from './CidadeDropDown'
 import travelLogo from '../assets/travel.png'
 import './Detalhe.css'
 
 export default function Detalhe(props) {
-  const navigate = useNavigate()
-  const [estadoAtual, setEstadoAtual] = React.useState('');
-  const [cidadeAtual, setCidadeAtual] = React.useState('');
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [estadoAtual, setEstadoAtual] = React.useState(location.state?.estado || '');
+  const [cidadeAtual, setCidadeAtual] = React.useState(location.state?.cidade || '');
 
   function onEstadoChanged(estado) {
     setEstadoAtual(estado);
