@@ -1,0 +1,9 @@
+.container {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 40px;
+  max-width: 800px;
+}

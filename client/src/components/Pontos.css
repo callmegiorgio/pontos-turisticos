@@ -1,0 +1,17 @@
+.pontos {
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.pontos-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.pontos-nenhum {
+    align-self: center;
+    justify-self: center;
+}

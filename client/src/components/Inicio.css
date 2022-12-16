@@ -1,0 +1,23 @@
+.inicio {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.inicio-logo {
+    grid-column: span 2;
+    width: 140px;
+}
+
+.inicio-cadastrar {
+    grid-column: span 2;
+}
+
+.inicio-cadastrar button {
+    width: 100%;
+}
+
+.inicio-ponto {
+    grid-column: span 3;
+}

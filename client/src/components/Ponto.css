@@ -1,0 +1,37 @@
+.ponto {
+    align-self: stretch;
+    background-color: rgb(231, 249, 253);
+    padding: 14px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgb(86, 154, 172);
+}
+
+.ponto-cabecalho {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.ponto-nome {
+    font-size: 20px;
+    flex: 0 0 auto;
+}
+
+.ponto-localizacao {
+    font-size: 14px;
+    padding: 4px 8px;
+    color: white;
+    background-color: rgb(24, 100, 151);
+    border-radius: 6px;
+    flex: 0 1 auto;
+}
+
+.ponto-descricao {
+    font-size: 14px;
+    text-align: justify;
+    max-height: 120px;
+    overflow-y: auto;
+    margin-bottom: 12px;
+}

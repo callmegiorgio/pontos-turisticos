@@ -1,0 +1,43 @@
+.detalhe {
+    display: grid;
+    grid-template-rows: repeat(6, auto);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.detalhe-logo {
+    width: 140px;
+    margin-bottom: 20px;
+    grid-column: span 4;
+}
+
+.detalhe-estado {
+    display: flex;
+    gap: 10px;
+    grid-column: span 3;
+}
+
+.detalhe-estado input {
+    width: 100%;
+}
+
+.detalhe-localizacao {
+    grid-column: span 4;
+}
+
+.detalhe-right {
+    grid-column: span 3;
+}
+
+.detalhe textarea {
+    height: 80px;
+    resize: none;
+}
+
+.detalhe-voltar {
+    grid-column: 2;
+}
+
+.detalhe-cadastrar {
+    grid-column: 4;
+}
