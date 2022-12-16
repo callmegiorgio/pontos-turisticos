@@ -18,10 +18,13 @@ export default function EstadoDropDown(props) {
       .then(res => res.json())
       .then(arr => {
         const siglaEstados = arr.map(estado => estado.sigla).sort();
+
         setEstados(siglaEstados);
-        props.onChange(siglaEstados[0]);
+
+        if (!siglaEstados.includes(props.estado))
+          props.onChange(siglaEstados[0]);
       });
-  }, []);
+  }, [props.estado]);
 
   return (
     <select disabled={props.readOnly} value={props.estado} onChange={(event) => props.onChange(event.target.value)}>

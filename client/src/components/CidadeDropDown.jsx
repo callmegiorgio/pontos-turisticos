@@ -13,8 +13,11 @@ export default function CidadeDropDown(props) {
       .then(res => res.json())
       .then(arr => {
         const nomeCidades = arr.map(municipio => municipio.nome).sort();
+        
         setCidades(nomeCidades);
-        props.onChange(nomeCidades[0]);
+
+        if (!nomeCidades.includes(props.cidade))
+          props.onChange(nomeCidades[0]);
       });
   }, [props.estado]);
 
