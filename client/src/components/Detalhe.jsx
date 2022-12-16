@@ -9,15 +9,15 @@ export default function Detalhe(props) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [estadoAtual, setEstadoAtual] = React.useState(location.state?.estado || '');
-  const [cidadeAtual, setCidadeAtual] = React.useState(location.state?.cidade || '');
+  const [estado, setEstado] = React.useState(location.state?.estado || '');
+  const [cidade, setCidade] = React.useState(location.state?.cidade || '');
 
   function onEstadoChanged(estado) {
-    setEstadoAtual(estado);
+    setEstado(estado);
   }
 
   function onCidadeChanged(cidade) {
-    setCidadeAtual(cidade);
+    setCidade(cidade);
   }
 
   function cadastrar() {
@@ -32,8 +32,8 @@ export default function Detalhe(props) {
       <p className='detalhe-localizacao bold'>Localização:</p>
       <p>UF/Cidade:</p>
       <div className='detalhe-estado'>
-        <EstadoDropDown readOnly={props.readOnly} onChange={onEstadoChanged} estado={estadoAtual}  />
-        <CidadeDropDown readOnly={props.readOnly} onChange={onCidadeChanged} estado={estadoAtual} cidade={cidadeAtual} />
+        <EstadoDropDown readOnly={props.readOnly} onChange={onEstadoChanged} estado={estado}  />
+        <CidadeDropDown readOnly={props.readOnly} onChange={onCidadeChanged} estado={estado} cidade={cidade} />
       </div>
       <p>Referência:</p>
       <input className='detalhe-right' type='text' readOnly={props.readOnly} />
