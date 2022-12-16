@@ -9,8 +9,11 @@ export default function Detalhe(props) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [estado, setEstado] = React.useState(location.state?.estado || '');
-  const [cidade, setCidade] = React.useState(location.state?.cidade || '');
+  const [nome,       setNome]       = React.useState(location.state?.nome       || '');
+  const [estado,     setEstado]     = React.useState(location.state?.estado     || '');
+  const [cidade,     setCidade]     = React.useState(location.state?.cidade     || '');
+  const [referencia, setReferencia] = React.useState(location.state?.referencia || '');
+  const [descricao,  setDescricao]  = React.useState(location.state?.descricao  || '');
 
   function onEstadoChanged(estado) {
     setEstado(estado);
@@ -28,7 +31,13 @@ export default function Detalhe(props) {
     <div className='detalhe'>
       <img src={travelLogo} className='detalhe-logo' />
       <p className='bold'>Nome:</p>
-      <input className='detalhe-right' type='text' readOnly={props.readOnly} />
+      <input
+        className='detalhe-right'
+        type='text'
+        readOnly={props.readOnly}
+        value={nome}
+        onChange={event => setNome(event.target.value)}
+      />
       <p className='detalhe-localizacao bold'>Localização:</p>
       <p>UF/Cidade:</p>
       <div className='detalhe-estado'>
@@ -36,11 +45,30 @@ export default function Detalhe(props) {
         <CidadeDropDown readOnly={props.readOnly} onChange={onCidadeChanged} estado={estado} cidade={cidade} />
       </div>
       <p>Referência:</p>
-      <input className='detalhe-right' type='text' readOnly={props.readOnly} />
+      <input
+        className='detalhe-right'
+        type='text'
+        readOnly={props.readOnly}
+        value={referencia}
+        onChange={event => setReferencia(event.target.value)}
+      />
       <p className='bold'>Descrição:</p>
-      <textarea className='detalhe-right' readOnly={props.readOnly} />
+      <textarea
+        className='detalhe-right'
+        readOnly={props.readOnly}
+        value={descricao}
+        onChange={event => setDescricao(event.target.value)}
+      />
       <button className='detalhe-voltar' onClick={() => navigate(-1)}>voltar</button>
-      {!props.readOnly && <button className='detalhe-cadastrar' onClick={cadastrar}>cadastrar</button>}
+      {
+        !props.readOnly &&
+        <button
+          className='detalhe-cadastrar'
+          onClick={cadastrar}
+        >
+          cadastrar
+        </button>
+      }
     </div>
   )
 }
