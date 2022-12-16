@@ -10,7 +10,7 @@ function makePontos(count = 5) {
     nome: "Cristo Redentor",
     cidade: "Rio de Janeiro",
     estado: "RJ",
-    localizacao: "Morro do Corcovado",
+    referencia: "Morro do Corcovado",
     descricao: 
       "Cristo Redentor é uma estátua art déco que retrata Jesus Cristo, " +
       "localizada no topo do morro do Corcovado, a 709 metros acima do nível do mar, " + 
