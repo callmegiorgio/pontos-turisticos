@@ -5,15 +5,15 @@ const bodyParser = require('body-parser');
 const cors       = require('cors');
 const db         = require('./database');
 
-const HTTP_PORT = process.env.HTTP_PORT || 8000;
+const PORT = process.env.PORT || 8000;
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.listen(HTTP_PORT, () => {
-  console.log(`Server is running on http://localhost:${HTTP_PORT}`)
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`)
 });
 
 /**
