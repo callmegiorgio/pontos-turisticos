@@ -1,6 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 
-const db = new sqlite3.Database('./db.sqlite3', (error) => {
+const db = new sqlite3.Database(':memory:', (error) => {
     if (error)
         console.log(error);
 });
