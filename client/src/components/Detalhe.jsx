@@ -58,6 +58,10 @@ export default function Detalhe(props) {
     });
   }
 
+  // O botão cadastrar só está ativado se para cada campo do ponto turístico
+  // (nome, descrição, etc.), o campo não for uma string vazia.
+  const cadastrarAtivado = Object.keys(state).every(key => state[key].length !== 0);
+
   return (
     <div className='detalhe'>
       <img src={travelLogo} className='detalhe-logo' />
@@ -99,6 +103,7 @@ export default function Detalhe(props) {
         <button
           className='detalhe-cadastrar'
           onClick={cadastrar}
+          disabled={!cadastrarAtivado}
         >
           cadastrar
         </button>
