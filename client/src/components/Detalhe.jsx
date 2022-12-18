@@ -5,17 +5,21 @@ import CidadeDropDown from './CidadeDropDown'
 import travelLogo from '../assets/travel.png'
 import './Detalhe.css'
 
-export default function Detalhe(props) {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const [state, setState] = React.useState(location.state || {
+function criarPontoVazio() {
+  return {
     nome: '',
     estado: '',
     cidade: '',
     referencia: '',
     descricao: ''
-  });
+  };
+}
+
+export default function Detalhe(props) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [state, setState] = React.useState(location.state || criarPontoVazio());
 
   function onEstadoChanged(estado) {
     setState(prevState => ({...prevState, estado: estado}));
@@ -34,7 +38,24 @@ export default function Detalhe(props) {
   }
 
   function cadastrar() {
-    console.log('cadastrar:', state)
+    fetch('http://localhost:8000/api/ponto', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(state)
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.message === 'success') {
+        alert(`O ponto turístico '${state.nome}' foi cadastrado com sucesso!`);
+        setState(criarPontoVazio());
+      }
+      else {
+        alert('Falha ao cadastrar o ponto turístico: ' + data.error);
+      }
+    });
   }
 
   return (
