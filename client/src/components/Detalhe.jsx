@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import EstadoDropDown from './EstadoDropDown'
 import CidadeDropDown from './CidadeDropDown'
+import serverUrl  from '../serverUrl'
 import travelLogo from '../assets/travel.png'
 import './Detalhe.css'
 
@@ -38,7 +39,7 @@ export default function Detalhe(props) {
   }
 
   function cadastrar() {
-    fetch('http://localhost:8000/api/ponto', {
+    fetch(serverUrl() + '/api/ponto', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

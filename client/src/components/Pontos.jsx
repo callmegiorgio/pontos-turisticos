@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { nanoid } from 'nanoid'
 import Inicio from './Inicio'
 import Ponto from './Ponto'
+import serverUrl from '../serverUrl'
 import './Pontos.css'
 
 export default function Pontos() {
@@ -16,7 +17,7 @@ export default function Pontos() {
   )
 
   React.useEffect(() => {
-    fetch(`http://localhost:8000/api/pontos/${termo}`)
+    fetch(serverUrl() + `/api/pontos/${termo}`)
     .then(res => res.json())
     .then(res => {
       if (res.message === 'success')
