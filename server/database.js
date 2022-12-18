@@ -1,8 +1,12 @@
 const sqlite3 = require('sqlite3').verbose();
 
-const db = new sqlite3.Database(':memory:', (error) => {
+const DB_FILE = process.env.DB_FILE || ':memory:';
+
+const db = new sqlite3.Database(DB_FILE, (error) => {
     if (error)
         console.log(error);
+    else
+        console.log(`Using database '${DB_FILE}'`);
 });
 
 db.serialize(() => {
