@@ -3,7 +3,9 @@ const bodyParser = require('body-parser');
 const cors       = require('cors');
 const db         = require('./database');
 
-const HTTP_PORT = 8000;
+require('dotenv').config();
+
+const HTTP_PORT = process.env.HTTP_PORT || 8000;
 
 const app = express();
 app.use(cors());
