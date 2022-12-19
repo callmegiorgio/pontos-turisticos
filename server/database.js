@@ -38,7 +38,13 @@ function criarPontoTuristico({nome, cidade, estado, referencia, descricao}, call
     });
 }
 
-function obterPontosTuristicos(termo, callback) {
+function obterPontosTuristicos(callback) {
+    const sql = 'SELECT * FROM ponto ORDER BY timestamp DESC';
+
+    db.all(sql, callback);
+}
+
+function obterPontosTuristicosPorTermo(termo, callback) {
     const sql = 
         ` SELECT *
             FROM ponto
@@ -52,5 +58,6 @@ function obterPontosTuristicos(termo, callback) {
 
 module.exports = {
     criarPontoTuristico,
-    obterPontosTuristicos
+    obterPontosTuristicos,
+    obterPontosTuristicosPorTermo
 };

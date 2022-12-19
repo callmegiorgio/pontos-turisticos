@@ -66,6 +66,23 @@ app.post('/api/ponto', (req, res, next) => {
 });
 
 /**
+ * [GET] Obtem todos os pontos turísticos, em ordem descrente pela data de inserção.
+ */
+app.get('/api/pontos/', (req, res, next) => {
+  db.obterPontosTuristicos((error, rows) => {
+    if (error) {
+      res.status(400).json({'error': error.message});
+      return;
+    }
+    
+    res.json({
+      'message': 'success',
+      'data': rows
+    });
+  })
+});
+
+/**
  * [GET] Obtem todos os pontos turísticos que combinam com um termo,
  * em ordem descrente pela data de inserção.
  * 
@@ -73,7 +90,7 @@ app.post('/api/ponto', (req, res, next) => {
  * no nome, descrição, ou referência desse ponto turístico.
  */
 app.get('/api/pontos/:termo', (req, res, next) => {
-  db.obterPontosTuristicos(req.params.termo, (error, rows) => {
+  db.obterPontosTuristicosPorTermo(req.params.termo, (error, rows) => {
     if (error) {
       res.status(400).json({'error': error.message});
       return;
