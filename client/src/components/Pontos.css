@@ -11,6 +11,11 @@
     gap: 20px;
 }
 
+.pontos-paginacao {
+    display: flex;
+    justify-content: space-between;
+}
+
 .pontos-nenhum {
     align-self: center;
     justify-self: center;
