@@ -17,10 +17,17 @@ respectivamente.
 
 ## Cliente
 
-Para compilar a aplicação web, vá para o diretório `client` e execute `npm run build`:
+Para compilar a aplicação web, vá para o diretório `client` e defina a variável
+de ambiente `VITE_SERVER_URL` para o endereço do servidor. Isso pode ser feito
+criando um arquivo `.env` no diretório raiz do cliente:
 
 ```sh
-> cd client
+VITE_SERVER_URL=http://localhost:8000
+```
+
+Em seguida, execute `npm run build`:
+
+```sh
 > npm run build
 ```
 
@@ -30,7 +37,6 @@ para rodar um servidor que servirá a aplicação compilada.
 Alternativamente, pode-se rodar a aplicação em modo de desenvolvimento:
 
 ```sh
-> cd client
 > npm run dev
 ```
 
@@ -48,4 +54,6 @@ O procedimento é semelhante para o servidor, exceto que este se encontra no dir
 ```
 
 Isso fará o servidor rodar na porta padrão 8000 (http://localhost:8000/). O servidor
-também pode rodar em versão de desenvolvimento com `npm run dev`.
+também pode rodar em modo de desenvolvimento com `npm run dev`, e recebe as variáveis
+de ambiente `PORT`, que define a porta na qual ele ouvirá por conexões, e `DB_FILE`,
+que define o nome do arquivo SQLite usado como banco de dados.
