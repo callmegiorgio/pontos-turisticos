@@ -10,8 +10,9 @@ const MAX_PONTOS_POR_PAGINA = 5;
 
 export default function Pontos() {
   const [searchParams, setSearchParams] = useSearchParams()
-  const [pontos, setPontos] = React.useState([]);
-  const [pagina, setPagina] = React.useState(0);
+  const [pontos, setPontos]         = React.useState([]);
+  const [pagina, setPagina]         = React.useState(0);
+  const [carregando, setCarregando] = React.useState(false);
 
   const termo = searchParams.get('busca')
 
@@ -34,11 +35,15 @@ export default function Pontos() {
     if (termo !== null)
       url += termo;
 
+    setCarregando(true);
+
     fetch(url)
     .then(res => res.json())
     .then(res => {
       if (res.message === 'success')
         setPontos(res.data);
+      
+      setCarregando(false);
     });
   }, [termo]);
 
@@ -49,17 +54,23 @@ export default function Pontos() {
     <div className='pontos'>
       <Inicio termo={termo} />
       {
-        pontoElementos.length > 0
+        carregando
         ?
-        <div className='pontos-lista'>
-          {pontoElementos}
-          <div className='pontos-paginacao'>
-            <button disabled={!possuiPaginaAnterior} onClick={() => mudarPagina(-1)}>Voltar</button>
-            <button disabled={!possuiPaginaSeguinte} onClick={() => mudarPagina(+1)}>Avançar</button>
-          </div>
-        </div>
+        <h3 className='pontos-mensagem'>Carregando...</h3>
         :
-        <h3 className='pontos-nenhum'>Não encontrei nenhum resultado para a sua busca :(</h3>
+        (
+          pontoElementos.length > 0
+          ?
+          <div className='pontos-lista'>
+            {pontoElementos}
+            <div className='pontos-paginacao'>
+              <button disabled={!possuiPaginaAnterior} onClick={() => mudarPagina(-1)}>Voltar</button>
+              <button disabled={!possuiPaginaSeguinte} onClick={() => mudarPagina(+1)}>Avançar</button>
+            </div>
+          </div>
+          :
+          <h3 className='pontos-mensagem'>Não encontrei nenhum resultado para a sua busca :(</h3>
+        )
       }
     </div>
   )
