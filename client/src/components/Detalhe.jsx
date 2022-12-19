@@ -97,6 +97,7 @@ export default function Detalhe(props) {
         name='descricao'
         value={state.descricao}
         onChange={onOutrosChanged}
+        maxLength={100}
       />
       <button className='detalhe-voltar' onClick={() => navigate(-1)}>voltar</button>
       {
