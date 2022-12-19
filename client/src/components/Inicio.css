@@ -7,6 +7,9 @@
 
 .inicio-logo {
     grid-column: span 2;
+}
+
+.inicio-logo img {
     width: 140px;
 }
 

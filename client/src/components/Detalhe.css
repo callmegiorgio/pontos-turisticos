@@ -6,9 +6,12 @@
 }
 
 .detalhe-logo {
-    width: 140px;
     margin-bottom: 20px;
     grid-column: span 4;
+}
+
+.detalhe-logo img {
+    width: 140px;
 }
 
 .detalhe-estado {

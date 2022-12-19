@@ -12,7 +12,9 @@ export default function Inicio(props) {
 
     return (
         <div className='inicio'>
-            <img className='inicio-logo' src={travelLogo}/>
+            <div className='inicio-logo'>
+                <Link to='/'><img src={travelLogo}/></Link>
+            </div>
             <div className='inicio-cadastrar'>
                 <Link to='/pontos/novo'><button>cadastrar um ponto turístico</button></Link>
             </div>

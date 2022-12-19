@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 import EstadoDropDown from './EstadoDropDown'
 import CidadeDropDown from './CidadeDropDown'
 import serverUrl  from '../serverUrl'
@@ -65,7 +65,9 @@ export default function Detalhe(props) {
 
   return (
     <div className='detalhe'>
-      <img src={travelLogo} className='detalhe-logo' />
+      <div className='detalhe-logo'>
+        <Link to='/'><img src={travelLogo} /></Link>
+      </div>
       <p className='bold'>Nome:</p>
       <input
         className='detalhe-right'
