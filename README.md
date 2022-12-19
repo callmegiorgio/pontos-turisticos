@@ -13,6 +13,18 @@ Para baixar o Node.js, visite https://nodejs.org/.
 Durante o desenvolvimento, foram utilizados Node.js e npm nas versões 18.10 e 8.19,
 respectivamente.
 
+# Instalação
+
+Para instalar as dependências da aplicação, vá para os diretórios `client` e `server`
+e execute `npm install`:
+
+```sh
+> cd client
+> npm install
+> cd ../server
+> npm install
+```
+
 # Uso
 
 ## Cliente
