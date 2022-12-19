@@ -17,7 +17,12 @@ export default function Pontos() {
   )
 
   React.useEffect(() => {
-    fetch(serverUrl() + `/api/pontos/${termo}`)
+    let url = serverUrl() + '/api/pontos/';
+
+    if (termo !== null)
+      url += termo;
+
+    fetch(url)
     .then(res => res.json())
     .then(res => {
       if (res.message === 'success')
