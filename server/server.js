@@ -1,14 +1,11 @@
-require('dotenv').config();
-
 const express    = require('express');
 const bodyParser = require('body-parser');
 const cors       = require('cors');
-const db         = require('./services/database');
 
 const pontoRouter = require('./routes/ponto')
 const pontosRouter = require('./routes/pontos')
 
-const PORT = process.env.PORT || 8000;
+const { port } = require('./config')
 
 const app = express();
 app.use(cors());
@@ -18,8 +15,8 @@ app.use(bodyParser.json());
 app.use('/api/ponto', pontoRouter);
 app.use('/api/pontos', pontosRouter);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`)
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`)
 });
 
 /**
