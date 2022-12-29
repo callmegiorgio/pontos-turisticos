@@ -1,14 +1,15 @@
 const sqlite3 = require('sqlite3').verbose();
+const { open } = require('sqlite');
 const { db_file } = require('../config');
 
-const db = new sqlite3.Database(db_file, (error) => {
-  if (error)
-    console.log(error);
-  else
-    console.log(`Using database '${db_file}'`);
+const dbPromise = open({
+  filename: db_file,
+  driver: sqlite3.Database
 });
 
-db.serialize(() => {
+dbPromise.then(db => {
+  console.log(`Using database '${db_file}'`);
+
   db.run(
     `CREATE TABLE IF NOT EXISTS ponto (
       id         INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -18,32 +19,32 @@ db.serialize(() => {
       referencia VARCHAR(80)         NOT NULL,
       descricao  VARCHAR(100)        NOT NULL,
       timestamp  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP
-    )`,
-    (error) => {
-      if (error) console.log(error);
-    }
-  );
+    )`
+  ).catch(err => console.log(err));
 });
 
-function criarPontoTuristico({nome, cidade, estado, referencia, descricao}, callback) {
-  const sql = 'INSERT INTO ponto (nome, cidade, estado, referencia, descricao) VALUES (?, ?, ?, ?, ?)';
-  const params = [nome, cidade, estado, referencia, descricao];
+dbPromise.catch(err => console.error(`Could not open database '${db_file}'`));
 
-  db.run(sql, params, function(error, result) {
-    if (error)
-      callback(error, null);
-    else
-      callback(error, this.lastID);
-  });
+async function criarPontoTuristico(ponto) {
+  const sql = 'INSERT INTO ponto (nome, cidade, estado, referencia, descricao) VALUES (?, ?, ?, ?, ?)';
+  const params = [ponto.nome, ponto.cidade, ponto.estado, ponto.referencia, ponto.descricao];
+
+  const db     = await dbPromise;
+  const result = await db.run(sql, params);
+
+  return result.lastID;
 }
 
-function obterPontosTuristicos(callback) {
+async function obterPontosTuristicos() {
   const sql = 'SELECT * FROM ponto ORDER BY timestamp DESC';
 
-  db.all(sql, callback);
+  const db     = await dbPromise;
+  const result = await db.all(sql);
+
+  return result;
 }
 
-function obterPontosTuristicosPorTermo(termo, callback) {
+async function obterPontosTuristicosPorTermo(termo) {
   const sql = 
     ` SELECT *
         FROM ponto
@@ -52,7 +53,10 @@ function obterPontosTuristicosPorTermo(termo, callback) {
           OR referencia LIKE $termo
     ORDER BY timestamp DESC`;
 
-  db.all(sql, {$termo: '%' + termo + '%'}, callback);
+  const db     = await dbPromise;
+  const result = await db.all(sql, {$termo: '%' + termo + '%'});
+
+  return result;
 }
 
 module.exports = {

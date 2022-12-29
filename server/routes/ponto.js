@@ -5,7 +5,7 @@ const db = require('../services/database')
 /**
  * [POST] Cria um ponto turístico.
  */
-router.post('/', (req, res, next) => {
+router.post('/', async (req, res, next) => {
   let error_msg = null;
 
   if (!req.body.nome) {
@@ -29,26 +29,26 @@ router.post('/', (req, res, next) => {
     return;
   }
 
-  const data = {
+  const ponto = {
     nome:       req.body.nome,
     cidade:     req.body.cidade,
     estado:     req.body.estado,
     referencia: req.body.referencia,
     descricao:  req.body.descricao
   };
-
-  db.criarPontoTuristico(data, (error, id) => {
-    if (error) {
-      res.status(400).json({error: error.message});
-      return;
-    }
-
+  
+  try {
+    const pontoID = await db.criarPontoTuristico(ponto);
+    
     res.json({
       message: 'success',
-      data: data,
-      id: id
+      data: ponto,
+      id: pontoID
     });
-  });
+  }
+  catch (err) {
+    res.status(400).json({error: err.message});
+  }
 });
 
 module.exports = router;
