@@ -66,6 +66,33 @@ O procedimento é semelhante para o servidor, exceto que este se encontra no dir
 ```
 
 Isso fará o servidor rodar na porta padrão 8000 (http://localhost:8000/). O servidor
-também pode rodar em modo de desenvolvimento com `npm run dev`, e recebe as variáveis
-de ambiente `PORT`, que define a porta na qual ele ouvirá por conexões, e `DB_FILE`,
-que define o nome do arquivo SQLite usado como banco de dados.
+também pode rodar em modo de desenvolvimento com `npm run dev`, e recebe as seguintes
+variáveis de ambiente:
+- `PORT`, define a porta na qual o servidor ouvirá por conexões.
+- `DB_TYPE`, define o tipo de banco de dados usado. Valores aceitáveis são `sqlite`
+   e `mssql`.
+- `DB_CONN`, define a conexão com o banco de dados. Se `DB_TYPE` for `sqlite`, 
+  `DB_CONN` pode ser `:memory:` para abrir um banco de dados na memória ou o caminho
+  de um arquivo SQLite. Se `DB_TYPE` for `mssql`, `DB_CONN` é uma string de conexão
+  SQL Server cujo formato é definido [aqui][mssql-connection-string].
+
+Por exemplo, para configurar o servidor para usar SQL Server com a Autenticação do Windows,
+crie o seguinte arquivo `.env`:
+
+```sh
+DB_TYPE=mssql
+DB_CONN="Driver={SQL Server Native Client 11.0};Server=<NomeServidor>;Database=<NomeBanco>;Trusted_Connection=yes;"
+```
+
+onde `<NomeServidor>` é um nome tal como `WINDOWS-PC\SQLEXPRESS` e `<NomeBanco>` é o nome
+do banco de dados utilizado.
+
+Para configurar o servidor para utilizar o SQL Server com credenciais de usuário, defina
+os parametros `Uid` e `Pwd`, e remova `Trusted_Connection=yes`:
+
+```sh
+DB_TYPE=mssql
+DB_CONN="Driver={SQL Server Native Client 11.0};Server=<NomeServidor>;Database=<NomeBanco>;Uid=<Usuario>;Pwd=<Senha>"
+```
+
+  [mssql-connection-string]: <https://learn.microsoft.com/en-us/dotnet/api/system.data.odbc.odbcconnection.connectionstring?view=dotnet-plat-ext-5.0>
