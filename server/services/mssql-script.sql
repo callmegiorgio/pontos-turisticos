@@ -30,13 +30,13 @@ ALTER PROCEDURE [dbo].[SP_InserirPonto] (
 )
 AS
 BEGIN
-	DECLARE @tmp TABLE (ponto_id INT);
+    DECLARE @tmp TABLE (ponto_id INT);
 
     INSERT INTO ponto (nome, cidade, estado, referencia, descricao)
     OUTPUT inserted.id INTO @tmp
     VALUES (@nome, @cidade, @estado, @referencia, @descricao);
 
-	SELECT @ponto_id = ponto_id FROM @tmp;
+    SELECT @ponto_id = ponto_id FROM @tmp;
 END
 GO
 
